@@ -20,9 +20,12 @@ class AppReview {
     }
   }
 
-  static Future<String> get writeReview async {
+  static Future<String> get writeReview async => writeReviewManual();
+
+  static Future<String> writeReviewManual({String appId, String countryCode}) async {
     if (Platform.isIOS) {
-      final String _appID = await getiOSAppID;
+      final String _appID = appId ?? await getiOSAppID;
+      final String _countryCode = countryCode ?? 'us';
       String details = '';
       final String _url =
           'itunes.apple.com/kr/app/id$_appID?mt=8&action=write-review';
